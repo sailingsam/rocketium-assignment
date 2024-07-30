@@ -25,7 +25,6 @@ This project is a web application that fetches dummy data from an external URL a
   - Internal server errors
 - **Global Error Handling Middleware**: Catches and responds to errors with a standardized format.
 - **Project Structure**: Organized into controllers, routes, and utility functions for maintainability.
-- **Automatic Data Fetching**: Data is fetched and saved when the server starts up.
 
 ## Project Setup
 
