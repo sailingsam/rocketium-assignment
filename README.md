@@ -2,6 +2,15 @@
 
 This project is a web application that fetches dummy data from an external URL and stores it in a local file. The data fetching operation is performed automatically when the server starts.
 
+## Table of Contents
+
+- [Features](#features)
+- [Project Setup](#project-setup)
+- [Dummy - Data Initialization](#dummy-data-initialization)
+- [Running the Project](#running-the-project)
+- [API Documantation](#api-documantation)
+- [Postman Documentation](#postman-documentation)
+
 ## Features
 
 - **Fetch Dummy Data**: Automatically fetches and stores dummy JSON data on server Initialisation.
@@ -46,7 +55,7 @@ Make sure you have the following software installed on your machine:
    npm install
    ```
 
-## Dummy - Data Initialization
+## Dummy Data Initialization
 
 The project fetches dummy data from an external URL and stores it in a local file - dummyData.json.
 
@@ -126,3 +135,11 @@ GET http://localhost:3000/api/data/V59OF92YF627HFY0
   "version": 6.1
 }
 ```
+
+## Postman Documentation
+
+You can view and interact with the API documentation in Postman using the following link:
+
+[Rocketium API Documentation](https://www.postman.com/sailingsam/workspace/rocketium-project/collection/34512549-e993a3ce-b71e-4a87-b0e4-359d546704cc?action=share&creator=34512549)
+
+Feel free to explore the collection to see the available endpoints and example requests.
