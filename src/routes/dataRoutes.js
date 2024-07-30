@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { getData, filterAndSortData } from '../controllers/dataController.js';
+import { getData, getUserData } from '../controllers/dataController.js';
 
 const router = Router();
 
-// for getting all data
+// Route for getting and sorting data
 router.get('/', getData);
 
-// for filtering/sorting data
-router.get('/filter', filterAndSortData);
+// Route for getting data by ID
+router.get('/:id', getUserData);
 
 export default router;
