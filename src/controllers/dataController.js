@@ -21,7 +21,7 @@ export const getData = (req, res) => {
   try {
     const data = readData(); // Fetch data from the source
 
-    const { sortby = 'name', order = 'asc', language } = req.query;
+    const { sortby = 'name', order = 'asc', language, version_min, version_max } = req.query;
 
     // Filtering by language
     let filteredData = data;
@@ -29,9 +29,24 @@ export const getData = (req, res) => {
       filteredData = filteredData.filter(item => item.language === language);
     }
 
+    // Filtering by version range
+    if (version_min || version_max) {
+      const minVersion = version_min ? parseFloat(version_min) : -Infinity;
+      const maxVersion = version_max ? parseFloat(version_max) : Infinity;
+
+      if (isNaN(minVersion) || isNaN(maxVersion)) {
+        return res.status(400).json({ error: 'Invalid version range parameters' });
+      }
+
+      filteredData = filteredData.filter(item => {
+        const version = parseFloat(item.version);
+        return version >= minVersion && version <= maxVersion;
+      });
+    }
+
     // Validation for sort parameters
     if (!['asc', 'desc'].includes(order)) {
-      return res.status(400).json({ error: 'Invalid sort order. Use (asc) or (desc)' });
+      return res.status(400).json({ error: 'Invalid sort order. Use "asc" or "desc"' });
     }
     if (!filteredData.every(item => item.hasOwnProperty(sortby))) {
       return res.status(400).json({
@@ -53,6 +68,7 @@ export const getData = (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 export const getUserData = (req, res) => {
   try {
