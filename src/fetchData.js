@@ -1,4 +1,3 @@
-// src/fetchData.js
 import axios from 'axios';
 import fs from 'fs';
 import { join, dirname } from 'path';

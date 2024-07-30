@@ -21,20 +21,26 @@ export const getData = (req, res) => {
   try {
     const data = readData(); // Fetch data from the source
 
-    const { sortby = 'name', order = 'asc' } = req.query;
+    const { sortby = 'name', order = 'asc', language } = req.query;
+
+    // Filtering by language
+    let filteredData = data;
+    if (language) {
+      filteredData = filteredData.filter(item => item.language === language);
+    }
 
     // Validation for sort parameters
     if (!['asc', 'desc'].includes(order)) {
-      return res.status(400).json({ error: 'Invalid sort order. Use (asc) or (desc)'});
+      return res.status(400).json({ error: 'Invalid sort order. Use (asc) or (desc)' });
     }
-    if (!data.every(item => item.hasOwnProperty(sortby))) {
+    if (!filteredData.every(item => item.hasOwnProperty(sortby))) {
       return res.status(400).json({
         error: `Invalid sortby parameter. No data field named "${sortby}"`,
       });
     }
 
     // Sorting
-    const sortedData = data.sort((a, b) => {
+    const sortedData = filteredData.sort((a, b) => {
       if (order === 'asc') {
         return a[sortby] > b[sortby] ? 1 : a[sortby] < b[sortby] ? -1 : 0;
       } else {
